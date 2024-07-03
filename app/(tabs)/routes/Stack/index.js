@@ -10,10 +10,12 @@ const { Navigator, Screen} = createNativeStackNavigator()
 
 export default function() {
     return(
-        <Navigator initialRouteName="Home"  screenOptions={headerShow=false }>
+        <Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
             <Screen name="Home" component={Home}/>
             <Screen name="Autismo" component={Autismo}/>
             <Screen name="GrauAutismo" component={GrausAutismo}/>
         </Navigator>
+           
+        
     )
 }
