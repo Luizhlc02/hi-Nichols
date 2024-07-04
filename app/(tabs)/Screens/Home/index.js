@@ -16,9 +16,12 @@ const Home = () =>{
   const handleCallNotification = async () => {
     const {status} = await Notifications.getPermissionsAsync();
 
-    if (status !== 'granted'){
-      Alert.alert("Você não ativou as notificações");
+    if (status !== 'granted') {
+      const { status: newStatus } = await Notifications.requestPermissionsAsync();
+    if (newStatus !== 'granted'){
+      Alert.alert("Ative as notificações");
       return;
+    }
     }
     await Notifications.scheduleNotificationAsync({
       content: {
@@ -40,18 +43,18 @@ const Home = () =>{
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity> 
     <Text style={styles.texto}>Graus de Autismo</Text>
-    <TouchableOpacity onPress={() => navigation.navigate("Graus do Autismo")} style={styles.button}>
+    <TouchableOpacity onPress={() => navigation.navigate("GrausAutismo")} style={styles.button}>
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity>
     <Text style={styles.textoT}>Tratamentos </Text>
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity onPress={() => navigation.navigate("Tratamentos")} style={styles.button}>
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity>
     <Text style={styles.texto}>Mais informações </Text>
     <TouchableOpacity style={styles.button}>
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity>
-    <Button title="notification" style={styles.buttonNotification} onPress={handleCallNotification} />
+    <Button title="🔔" color="#FFFFFF" marginTop="" style={styles.buttonNotification} onPress={handleCallNotification} />
     </View>
     </View>
   )
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
   marginTop: 50,     
   marginLeft: 90,
   fontSize:18,
+  fontWeight:"bold",
  }, 
  button:{
   backgroundColor:"#FFFFFF",
@@ -105,6 +109,7 @@ const styles = StyleSheet.create({
   marginTop: 50,     
   marginLeft:100,
   fontSize:18,
+  fontWeight:"bold",
  }, 
 })
 export default Home
