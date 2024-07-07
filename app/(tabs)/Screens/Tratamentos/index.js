@@ -2,7 +2,6 @@ import React from 'react';
 import { ScrollView,View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-
 export default function App(){
   const navigation = useNavigation();
   return(
@@ -45,11 +44,16 @@ export default function App(){
     <Text style={styles.texto2}>Escovar os dentes;</Text>
     <Text style={styles.texto2}>Alimentar-se sozinho;</Text>
     <Text style={styles.texto2}>De sentar sozinho, equilibrar-se.</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
+    <Text style={styles.texto}>Na Terapia Ocupacional, e também na Fonoaudiologia, é trabalhada a percepção dos cinco sentidos, justamente para apresentar diferentes texturas, tamanhos, gostos, cheiros, sabores, etc para a pessoa com TEA, dessa forma, cria-se uma percepção do mundo ao redor que ela ainda não possui, ou que tem dificuldade em perceber por conta de disforias sensoriais e estímulos (demais ou de menos).</Text>
+    <Text style={styles.h2}>Autismo Grau 3</Text>
+    <Text style={styles.texto}>Antes de enumerar o tratamento vale destacar  que o terceiro grau do autismo é o mais severo comprometendo completamente a comunicação do indivíduo diagnosticado, é importante adotar estratégias de comunicação eficazes, pois  são cruciais para expressarem suas necessidades, desejos e emoções, as dificuldades de comunicação podem levar à frustração e ao isolamento, tornando difícil para os indivíduos expressarem eficazmente as suas necessidades e emoções. As interações sociais podem ser opressoras e confusas, levando a dificuldades na construção e manutenção de relacionamentos. Sendo assim, comportamentos desafiadores, como automutilação ou agressão, podem surgir como resultado de dificuldades de comunicação e de processamento sensorial.</Text>
+    <Text style={styles.texto}>Os sistemas de Comunicação Aumentativa e Alternativa (AAC), como os sistemas de comunicação por troca de imagens (PECS) ou dispositivos geradores de fala, podem fornecer formas alternativas de comunicação. Também, histórias sociais, cronogramas visuais e suportes visuais também podem ajudar a pessoa a compreender e navegar em suas rotinas diárias. Vale destacar também a tecnologia assistiva, que desempenha um papel significativo. Desde dispositivos geradores de fala até aplicativos e softwares projetados para indivíduos com autismo grave, a tecnologia assistiva pode melhorar a comunicação, apoiar a aprendizagem e promover a independência. Por isso, estas ferramentas tecnológicas oferecem a oportunidade de se expressarem, interagirem com o mundo e acederem eficazmente aos recursos educacionais. Não obstante também, as técnicas de integração sensorial são essenciais, muitas vezes enfrentam dificuldades de processamento sensorial. Portanto, a terapia ocupacional pode ajudar a desenvolver habilidades de regulação sensorial e abordar sensibilidades sensoriais. Dietas sensoriais, salas sensoriais e o uso de ferramentas sensoriais podem fornecer o apoio necessário para gerenciar desafios sensoriais e melhorar o bem-estar geral. </Text>
+    <Text style={styles.texto}>O apoio da família e da comunidade é vital para capacitar pessoas com autismo de nível 3. As famílias muitas vezes desempenham um papel central no fornecimento de apoio contínuo e na defesa de seus entes queridos. Organizações comunitárias, grupos de apoio e programas de inclusão também contribuem para a criação de um ambiente inclusivo e de apoio para indivíduos com autismo de nível 3. Assim, ao promover a compreensão, a aceitação e a colaboração, as famílias e as comunidades podem fazer uma diferença significativa na vida dessas pessoas.</Text>
+    <Text style={styles.texto}>Assim como o Autismo Leve e Moderado, o Severo possuem os mesmos tratamentos para amenizar o transtorno , mesmo que sem os resultados esperados do grau 1 e 2 devido a gravidade do cenário de comportamento, comunicação e interação do diagnosticado. A seguir novamente algum dos tratamentos</Text>
+    <Text style={styles.h2}>Fonoaudiologia</Text>
+    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
+    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
+    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
     <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
     <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
     <Text style={styles.texto}>De modo geral, os sinais do autismo severo podem ser mais perceptíveis do que os de outros graus do espectro, como o autismo leve. Ainda assim, é importante que desde a primeira infância os pais estejam atentos aos seguintes sinais: pouco ou nenhum contato visual, apresentar resistência ao toque , a criança apresenta predileção por objetos que não causam interesse em outras pessoas , brincar de maneira diferente das outras crianças (exemplo: colocar o carrinho de ponta cabeça e girar as rodinhas), não desenvolver a fala ou desenvolver pouco até os 2 anos.</Text>

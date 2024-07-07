@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView,View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import { ProgressBar } from "../../Componentes/ProgreesBar";
+
+const ScrollProps = {
+  layoutMeasurement: {
+    height: Number
+  },
+  contentOffset: {
+    y: Number
+  },
+  contentSize: {
+    height: Number
+  }
+};
 
 
 export default function App(){
   const navigation = useNavigation();
+  const [percentage, setPercentage] = useState(0);
+  //Descobrindo a porcentagem do texto em tela  
+  function scrollPercentage({contentSize, contentOffset, layoutMeasurement}){
+    const value = ((layoutMeasurement.height + contentOffset.y) / contentSize.height) * 100;
+    setPercentage(value);
+  }
   return(
   <View style={styles.container}>
     <View style={styles.borda}>
-    <ScrollView>
+    <ScrollView
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={styles.content}
+    onScroll={(event) => scrollPercentage(event.nativeEvent)}>
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
       <Text style={styles.textoButton}>◀︎Voltar</Text>
     </TouchableOpacity>
@@ -34,6 +56,7 @@ Estudos do sequenciamento do material genético de indivíduos autistas identifi
     <Text style={styles.h2}>Dia Mundial do Autismo</Text>
     <Text style={styles.texto}>O Dia Mundial do Autismo, celebrado anualmente em 2 de abril, foi criado pela Organização das Nações Unidas em 18 de dezembro de 2007  para a conscientização acerca dessa questão. No evento de 2010, a ONU declarou que, segundo especialistas, acredita-se que este transtorno de desenvolvimento atinja cerca de 70 milhões de pessoas em todo o mundo, afetando a maneira como esses indivíduos se comunicam e interagem. Em 2011, o Brasil teve o Cristo Redentor, no Rio de Janeiro, iluminado de azul nos dias 1 e 2 de abril, além da Ponte Estaiada em São Paulo, os prédios do Senado Federal e do Ministério da Saúde em Brasília, o Teatro Amazonas em Manaus, a torre da Usina do Gasômetro, em Porto Alegre, entre muitos outros. Em Portugal, monumentos e prédios, como a Torre dos Clérigos e a estátua do Cristo Rei em frente a Lisboa também foram iluminados de azul para a data. Desde 2011, o Cristo Redentor, no Rio de Janeiro, vem se iluminando de azul todo ano para a data.</Text>
     </ScrollView>
+    <ProgressBar value = {percentage}/>
     </View>
     </View>
   )

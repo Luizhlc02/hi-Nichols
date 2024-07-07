@@ -3,6 +3,7 @@ import { ScrollView,View, Image, StyleSheet, Text, TouchableOpacity} from 'react
 import { useNavigation } from "@react-navigation/native";
 
 
+
 export default function App(){
   const navigation = useNavigation();
   return(
