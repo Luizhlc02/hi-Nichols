@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet,Text} from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { View, StyleSheet,Text, TouchableOpacity} from "react-native";
+import Animated, { BounceIn, FadeIn, useAnimatedStyle, useSharedValue,withSpring } from 'react-native-reanimated';
+import { Feather } from '@expo/vector-icons';
 
-export function ProgressBar({value}){
+export function ProgressBar({value, onMoveTop}){
     const widthContainer = useSharedValue(200);
+    const TouchableOpacityAnimated = Animated.createAnimatedComponent(TouchableOpacity);  
 
     const endReached = value >= 95;
     const animatedStyle = useAnimatedStyle (() =>{
@@ -11,17 +13,28 @@ export function ProgressBar({value}){
             width: widthContainer.value
         }
     });
-
+    //Caso a gente chegue no valor esperado pelo EndReached(no caso 95) ele ira mudar o tamanho da nossa ProgressBar
+    //withSpring esta criando a animação na transição de tamanho para ficar algo mais bonito
     useEffect(()=>{
-        widthContainer.value = endReached ? 56 : 200;
+        widthContainer.value = withSpring(endReached ? 56 : 200, {mass:0.3});
     }, [value]);
     return(
     <Animated.View style={[styles.container, animatedStyle]}>    
+     {
+        //Criando uma condição, caso o EndReached for true ele irar mudar a mensagem da nossa ProgressBar para um icone
+        endReached ?
+        <TouchableOpacityAnimated  entering={BounceIn}  onPress={onMoveTop}>
+            <Feather name = "arrow-up" size={24} color="#C4C4CC" />
+        </TouchableOpacityAnimated>
+        :
+     <>
       <Text style={styles.value}> {value.toFixed(0)}%</Text> 
             
        <View style={styles.tracker}>
        <View style={[styles.progress, {width: value + '%'}]} />
        </View>     
+    </>
+    }
     </Animated.View>
     )  
 }

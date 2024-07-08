@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState, useRef} from 'react';
 import { ScrollView,View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-
+import { ProgressBar } from "../../Componentes/ProgreesBar";
 
 
 export default function App(){
   const navigation = useNavigation();
+  const [percentage, setPercentage] = useState(0);
+  const scrollRef = useRef(null);
+  function scrollPercentage({contentSize, contentOffset, layoutMeasurement}){
+    const value = ((layoutMeasurement.height + contentOffset.y) / contentSize.height) * 100;
+    setPercentage(value);
+  }
+  function handleScrollMoveTop(){
+    scrollRef.current?.scrollTo({
+      x: 0,
+      y: 0,
+      animated: true
+    });
+  }
   return(
   <View style={styles.container}>
     <View style={styles.borda}>
-    <ScrollView>
+    <ScrollView
+      ref={scrollRef}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.content}
+      onScroll={(event) => scrollPercentage(event.nativeEvent)}>
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
       <Text style={styles.textoButton}>◀︎Voltar</Text>
     </TouchableOpacity>
@@ -37,6 +54,7 @@ extrema dificuldade em lidar com a mudança , comportamentos restritos e repetit
     <Text style={styles.texto}>Independente do nível de necessidade de suporte que uma pessoa no espectro do autismo tem, é importante que você entenda que todos podem aprender e se desenvolver. Assim, uma das primeiras coisas que a família deve fazer é acreditar no potencial de desenvolvimento daquela criança. Além disso, é importante começar o quanto antes a fazer as intervenções necessárias e buscar aquelas que são baseadas em práticas com evidências científicas. Você  pode também tomar algumas iniciativas que serão essenciais no desenvolvimento da criança: incentive a independência:, fazendo a criança praticar atividades no dia a dia, faça parte de uma comunidade: conheça pessoas que vivem uma realidade parecida e troque experiências e desabafos, invista no treinamento de pais: esse serviço é essencial e vai te ajudar a lidar com comportamentos no dia a dia. </Text>
     <Text style={styles.texto}>Reforçando mais uma vez que o diagnóstico deve ser feito ainda na infancia , nos primeiros anos de vida, quanto mais cedo o diagnóstico mais cedo será feito o tratamento, assim o grau de autismo irá amenizar. Por isso, o mais indicado é que, ao perceber ou ser alertada dos sinais de TEA, a família busque ajuda do pediatra, neuropediatra ou (neurologista infantil) ou psiquiatra infantil. Vale reforçar que a intervenção pode ser iniciada imediatamente, sem precisar esperar pelo diagnóstico. Isso porque, quanto antes começarem, maiores são os ganhos devido à neuroplasticidade.</Text>
     </ScrollView>
+    <ProgressBar value = {percentage} onMoveTop={handleScrollMoveTop}/>
     </View>
     </View>
   )
@@ -49,8 +67,8 @@ const styles = StyleSheet.create({
   },
   borda:{
     width: 385,
-    borderWidth: 10, // Largura da borda
-    borderColor: '#916EE1', // Cor da borda
+    borderWidth: 10, 
+    borderColor: '#916EE1', 
     height: 756
 
   },

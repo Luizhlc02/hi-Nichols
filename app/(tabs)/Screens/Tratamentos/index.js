@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useState, useRef} from 'react';
 import { ScrollView,View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import { ProgressBar } from "../../Componentes/ProgreesBar";
+
+
 
 export default function App(){
   const navigation = useNavigation();
+  const [percentage, setPercentage] = useState(0);
+  const scrollRef = useRef(null);
+  function scrollPercentage({contentSize, contentOffset, layoutMeasurement}){
+    const value = ((layoutMeasurement.height + contentOffset.y) / contentSize.height) * 100;
+    setPercentage(value);
+  }
+  function handleScrollMoveTop(){
+    scrollRef.current?.scrollTo({
+      x: 0,
+      y: 0,
+      animated: true
+    });
+  }
   return(
   <View style={styles.container}>
     <View style={styles.borda}>
-    <ScrollView>
+    <ScrollView
+    ref={scrollRef}
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={styles.content}
+    onScroll={(event) => scrollPercentage(event.nativeEvent)}>
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
       <Text style={styles.textoButton}>◀︎Voltar</Text>
     </TouchableOpacity>
@@ -51,15 +71,21 @@ export default function App(){
     <Text style={styles.texto}>O apoio da família e da comunidade é vital para capacitar pessoas com autismo de nível 3. As famílias muitas vezes desempenham um papel central no fornecimento de apoio contínuo e na defesa de seus entes queridos. Organizações comunitárias, grupos de apoio e programas de inclusão também contribuem para a criação de um ambiente inclusivo e de apoio para indivíduos com autismo de nível 3. Assim, ao promover a compreensão, a aceitação e a colaboração, as famílias e as comunidades podem fazer uma diferença significativa na vida dessas pessoas.</Text>
     <Text style={styles.texto}>Assim como o Autismo Leve e Moderado, o Severo possuem os mesmos tratamentos para amenizar o transtorno , mesmo que sem os resultados esperados do grau 1 e 2 devido a gravidade do cenário de comportamento, comunicação e interação do diagnosticado. A seguir novamente algum dos tratamentos</Text>
     <Text style={styles.h2}>Fonoaudiologia</Text>
-    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.texto}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.h2}>Autismo severo e os seus sinais</Text>
-    <Text style={styles.texto}>De modo geral, os sinais do autismo severo podem ser mais perceptíveis do que os de outros graus do espectro, como o autismo leve. Ainda assim, é importante que desde a primeira infância os pais estejam atentos aos seguintes sinais: pouco ou nenhum contato visual, apresentar resistência ao toque , a criança apresenta predileção por objetos que não causam interesse em outras pessoas , brincar de maneira diferente das outras crianças (exemplo: colocar o carrinho de ponta cabeça e girar as rodinhas), não desenvolver a fala ou desenvolver pouco até os 2 anos.</Text>
-    <Text style={styles.texto}>Independente do nível de necessidade de suporte que uma pessoa no espectro do autismo tem, é importante que você entenda que todos podem aprender e se desenvolver. Assim, uma das primeiras coisas que a família deve fazer é acreditar no potencial de desenvolvimento daquela criança. Além disso, é importante começar o quanto antes a fazer as intervenções necessárias e buscar aquelas que são baseadas em práticas com evidências científicas. Você  pode também tomar algumas iniciativas que serão essenciais no desenvolvimento da criança: incentive a independência:, fazendo a criança praticar atividades no dia a dia, faça parte de uma comunidade: conheça pessoas que vivem uma realidade parecida e troque experiências e desabafos, invista no treinamento de pais: esse serviço é essencial e vai te ajudar a lidar com comportamentos no dia a dia. </Text>
-    <Text style={styles.texto}>Reforçando mais uma vez que o diagnóstico deve ser feito ainda na infancia , nos primeiros anos de vida, quanto mais cedo o diagnóstico mais cedo será feito o tratamento, assim o grau de autismo irá amenizar. Por isso, o mais indicado é que, ao perceber ou ser alertada dos sinais de TEA, a família busque ajuda do pediatra, neuropediatra ou (neurologista infantil) ou psiquiatra infantil. Vale reforçar que a intervenção pode ser iniciada imediatamente, sem precisar esperar pelo diagnóstico. Isso porque, quanto antes começarem, maiores são os ganhos devido à neuroplasticidade.</Text>
+    <Text style={styles.texto}>O acompanhamento com o fonoaudiólogo é importante para melhorar a comunicação verbal da pessoa com o espectro autista com outras pessoas. Durante as sessões são realizados diversos exercícios que podem ajudar a criança a aumentar o seu vocabulário e melhorar a entoação da voz, podendo ser realizados jogos e brincadeiras para atrair a atenção da criança.</Text>
+    <Text style={styles.h2}>Musicoterapia</Text>
+    <Text style={styles.texto}>A música ajuda o individuo a entender as emoções, aumentando sua interação com o mundo à sua volta. O objetivo não é aprender a cantar ou tocar nenhum instrumento, sendo somente importante saber ouvir e se expressar através dos sons que os instrumentos podem produzir e também através de movimentos de dança, por exemplo, num ambiente leve e descontraído.</Text>
+    <Text style={styles.h2}>Psicoterapia</Text>
+    <Text style={styles.texto}>A psicoterapia deve ser guiada pelo psicólogo e pode ser realizada sozinho ou em grupo, com encontros semanais. Especialmente por meio da terapia comportamental, é possível desenvolver as habilidades de comunicação e interação, além de estratégias para lidar com as dificuldades emocionais.</Text>
+    <Text style={styles.h2}>Terapia ocupacional</Text>
+    <Text style={styles.texto}>A terapia ocupacional é também indicada no tratamento do transtorno do espectro autista, sendo muitas vezes indicada em associação com a psicoterapia. O objetivo da terapia ocupacional é melhorar a qualidade de vida da pessoa e estimular a autonomia, o que é feito através de tecnologias e atividades que necessitam da ação da pessoa, assim como atividades que promovam o processo de adaptação da pessoa à sociedade e a autoconfiança.</Text>
+    <Text style={styles.h2}>Psicomotricidade</Text>
+    <Text style={styles.texto}>Pode ser orientada por um fisioterapeuta especialista e, durante as sessões, podem ser realizados diversos jogos e brincadeiras com o objetivo de desenvolver a coordenação motora e controle dos movimentos.</Text>
+    <Text style={styles.h2}>Terapia ABA</Text>
+    <Text style={styles.texto}>A terapia ABA é um método que ajuda nas habilidades sociais, comunicativas e emocionais e de aprendizado, melhorando a qualidade de vida e a autonomia de pessoas com transtorno do espectro autista, que possuem dificuldades de socialização, aprendizagem ou de atividades do dia a dia, como alimentação e autocuidado</Text>
+    <Text style={styles.h2}>Equoterapia</Text>
+    <Text style={styles.texto}>A terapia com cavalos é muito útil para melhorar a reação de endireitamento do corpo, quando a criança está em cima do animal, a coordenação motora, o controle da respiração e desenvolver a autoconfiança do autista. As sessões geralmente duram entre 30 minutos e 1 hora</Text>
     </ScrollView>
+    <ProgressBar value = {percentage} onMoveTop={handleScrollMoveTop}/>
     </View>
     </View>
   )

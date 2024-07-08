@@ -51,7 +51,7 @@ const Home = () =>{
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity>
     <Text style={styles.texto}>Mais informações </Text>
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate("MaisInfos")}>
       <Text style={styles.buttonText}>Clique Aqui</Text>
     </TouchableOpacity>
     <Button title="🔔" color="#FFFFFF" marginTop="" style={styles.buttonNotification} onPress={handleCallNotification} />
